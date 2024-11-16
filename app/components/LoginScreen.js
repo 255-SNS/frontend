@@ -1,16 +1,17 @@
+// components/LoginScreen.js
 import React from 'react';
 import { View, Image, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const LoginScreen = ({ onNavigateToSignup, onNavigateMain }) => {
+const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require('../assets/img/login.png')} style={styles.logo} resizeMode="contain" />
       <TextInput placeholder="email" style={styles.input} />
       <TextInput placeholder="password" style={styles.input} secureTextEntry />
-      <TouchableOpacity style={styles.button} onPress={onNavigateMain}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
         <Text style={styles.buttonText}>로그인</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={onNavigateToSignup}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.buttonText}>회원가입</Text>
       </TouchableOpacity>
     </View>

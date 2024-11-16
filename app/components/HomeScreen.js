@@ -1,9 +1,10 @@
+// components/HomeScreen.js
 import React from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const HomeScreen = ({ onNavigateToLogin }) => {
+const HomeScreen = ({ navigation }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onNavigateToLogin}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Login')}>
       <Image source={require('../assets/img/logo.png')} style={styles.logo} resizeMode="contain" />
     </TouchableOpacity>
   );
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
   },
   logo: {
     width: 150,
