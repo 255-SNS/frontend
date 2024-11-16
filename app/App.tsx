@@ -4,11 +4,11 @@ import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './components/HomeScreen';
-import LoginScreen from './components/LoginScreen';
-import SignupScreen from './components/SignupScreen';
-import MainScreen from './components/MainScreen';
-import BoardListScreen from './components/BoardListScreen';
+import HomeScreen from './pages/HomeScreen';
+import LoginScreen from './pages/LoginScreen';
+import SignupScreen from './pages/SignupScreen';
+import MainScreen from './pages/MainScreen';
+import BoardListScreen from './pages/BoardListScreen';
 
 const Stack = createStackNavigator();
 
