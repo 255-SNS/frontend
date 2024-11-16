@@ -26,29 +26,36 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   logo: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
     marginBottom: 30,
   },
   input: {
     width: '80%',
-    height: 40,
+    height: 50,
     borderColor: '#ccc',
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 15,
     paddingHorizontal: 10,
     marginBottom: 15,
+    
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: '#F4F7F8',
     padding: 10,
     borderRadius: 20,
     width: '80%',
     alignItems: 'center',
     marginBottom: 10,
+    paddingVertical: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 5, // Android 그림자 효과
   },
   buttonText: {
-    color: '#FFF',
+    color: '#000',
     fontSize: 16,
   },
 });

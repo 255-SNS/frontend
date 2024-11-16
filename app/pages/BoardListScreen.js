@@ -21,7 +21,23 @@ const BoardListScreen = () => {
       <View style={styles.content}>
         <Text style={styles.menuTitle}>Menu</Text>
         {menuItems.map((item) => (
-          <TouchableOpacity key={item.id} style={styles.menuItem}>
+          <TouchableOpacity 
+            key={item.id} 
+            style={styles.menuItem}
+            onPress={() => {
+              if (item.title === '자유 게시판') {
+                navigation.navigate('FreeBoard');
+              } else if (item.title === '졸업생 게시판') {
+                navigation.navigate('GraduateBoard')
+              } else if (item.title === '취업 게시판') {
+                navigation.navigate('JobBoard')
+              } else if (item.title === 'Taxi Blurr') {
+                navigation.navigate('TaxiBoard')
+              } else if (item.title === '서점') {
+                navigation.navigate('BookstoreBoard')
+              } 
+            }}
+          >
             <View style={styles.iconContainer}>
               <Text style={styles.icon}>{item.icon}</Text>
             </View>
