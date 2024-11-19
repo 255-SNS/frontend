@@ -14,6 +14,7 @@ import GraduateScreen from './pages/boardpages/GraduateScreen';
 import JobScreen from './pages/boardpages/JobScreen';
 import TaxiScreen from './pages/boardpages/TaxiScreen';
 import BookstoreScreen from './pages/boardpages/BookstoreScreen';
+import ProfileScreen from './pages/ProfileScreen';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Signup" component={SignupScreen} />
           <Stack.Screen name="Main" component={MainScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="BoardList" component={BoardListScreen} />
           <Stack.Screen name="FreeBoard" component={FreeBoardScreen} options={{ title: '자유 게시판' }} />
           <Stack.Screen name="GraduateBoard" component={GraduateScreen} options={{ title: '졸업생 게시판' }} />
