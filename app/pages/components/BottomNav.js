@@ -1,21 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const BottomNav = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.bottomNav}>
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('HomeScreen')}>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Main')}>
         <Text style={styles.navIcon}>🏠</Text>
         <Text style={styles.navText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('ResumeScreen')}>
+      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Profile')}>
         <Text style={styles.navIcon}>📋</Text>
         <Text style={styles.navText}>자소서</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('ProfileScreen')}>
+      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Profile')}>
         <Text style={styles.navIcon}>👤</Text>
         <Text style={styles.navText}>Profile</Text>
       </TouchableOpacity>
@@ -24,13 +24,11 @@ const BottomNav = () => {
 };
 
 const styles = StyleSheet.create({
-  bottomNav: {
+  container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
-    height: 70, // 네비게이션 바 높이 설정
     backgroundColor: '#FFFFFF',
+    paddingVertical: 10,
     borderTopWidth: 1,
     borderColor: '#CCCCCC',
   },
@@ -38,12 +36,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   navIcon: {
-    fontSize: 24, // 아이콘 크기
-    marginBottom: 4, // 아이콘과 텍스트 간격
+    fontSize: 20,
   },
   navText: {
-    fontSize: 12, // 텍스트 크기
-    color: '#333333', // 텍스트 색상
+    fontSize: 12,
+    marginTop: 2,
   },
 });
 
