@@ -1,45 +1,99 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, TextInput, Button } from 'react-native';
 import BottomNav from '../components/BottomNav';
-
-const mockData = [
-  { id: '1', title: '제목입니다.', author: '익명 1', content: '작성글 입니다.' },
-  { id: '2', title: '제목입니다.', author: '익명 2', content: '작성글 입니다.' },
-  { id: '3', title: '제목입니다.', author: '익명 3', content: '작성글 입니다.' },
-  { id: '4', title: '제목입니다.', author: '익명 4', content: '작성글 입니다.' },
-  { id: '5', title: '제목입니다.', author: '익명 5', content: '작성글 입니다.' },
-  { id: '6', title: '제목입니다.', author: '익명 6', content: '작성글 입니다.' },
-];
+import BoardWrite from '../components/post/BoardWrite';
+import PostDetail from '../components/post/PostDetail';
 
 const FreeBoardScreen = () => {
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Text style={styles.title}>{item.title}</Text>
-      <View style={styles.details}>
-        <Text style={styles.author}>{item.author}</Text>
-        <Text style={styles.content}>{item.content}</Text>
-      </View>
-    </View>
+  const [posts, setPosts] = useState([
+    { id: '1', title: '첫 번째 게시글', writer: '익명1', content: '첫 번째 게시글 내용입니다.' },
+    { id: '2', title: '두 번째 게시글', writer: '익명2', content: '두 번째 게시글 내용입니다.' },
+  ]);
+  const [isCreating, setIsCreating] = useState(false);
+  const [newPost, setNewPost] = useState({ title: '', content: '' });
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const savePost = () => {
+    setPosts([...posts, { id: Date.now().toString(), ...newPost }]);
+    setNewPost({ title: '', writer: '', content: '' });
+    setIsCreating(false);
+  };
+
+  const cancelPost = () => {
+    setNewPost({ title: '', content: '' });
+    setIsCreating(false);
+  };
+
+  const viewPost = (post) => {
+    setSelectedPost(post);
+  };
+
+  const goBackToList = () => {
+    setSelectedPost(null);
+  };
+
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <Text style={styles.menuTitle}>자유 게시판</Text>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="원하시는 게시글을 검색해보세요"
-      />
+      {!isCreating && !selectedPost && (
+        <View style={styles.content}>
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="원하시는 글을 검색해보세요"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+            <TouchableOpacity style={styles.searchButton}>
+              <Text style={styles.searchButtonText}>🔍</Text>
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            data={filteredPosts}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.postItem}
+                onPress={() => viewPost(item)}
+              >
+                <Text style={styles.postTitle}>{item.title}</Text>
+                {/* <Text style={styles.postWriter}>{item.writer}</Text> */}
+                <Text style={styles.postContentPreview}>
+                  {item.content.slice(0, 20)}...
+                </Text>
+              </TouchableOpacity>
+            )}
+            contentContainerStyle={{ paddingBottom: 100 }}
+          />
+        </View>
+      )}
 
-      {/* List */}
-      <FlatList
-        data={mockData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContainer}
-      />
+      {isCreating && (
+        <BoardWrite
+          newPost={newPost}
+          setNewPost={setNewPost}
+          savePost={savePost}
+          cancelPost={cancelPost}
+        />
+      )}
 
-      {/* Bottom Navigation */}
+      {selectedPost && (
+        <PostDetail post={selectedPost} onBack={goBackToList} />
+      )}
+      
+      {!isCreating && !selectedPost && (
+        <TouchableOpacity
+          style={styles.createButton}
+          onPress={() => setIsCreating(true)}
+        >
+          <Text style={styles.createButtonText}>글 작성하기</Text>
+        </TouchableOpacity>
+      )}
+
       <View style={styles.bottomNavContainer}>
         <BottomNav />
       </View>
@@ -51,60 +105,72 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 20,
   },
-  menuTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333333',
-    marginVertical: 10,
-    textAlign: 'left',
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    backgroundColor: '#F4F7F8',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    height: 55,
+    marginTop: 20,
   },
   searchInput: {
-    height: 40,
-    borderColor: '#CCCCCC',
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    fontSize: 14,
-    marginBottom: 15,
-    alignSelf: 'center',
-    width: '90%',
-  },
-  listContainer: {
-    paddingBottom: 80, // Bottom navigation 공간 확보
-  },
-  itemContainer: {
-    backgroundColor: '#F9F9F9',
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 3 },
-    elevation: 3,
-  },
-  title: {
+    flex: 1,
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333333',
-    marginBottom: 5,
-    textAlign: 'left',
+    color: '#333',
   },
-  details: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+  searchButton: {
+    marginLeft: 10,
+    padding: 5,
   },
-  author: {
-    fontSize: 14,
-    color: '#888888',
-    marginBottom: 5,
+  searchButtonText: {
+    fontSize: 18,
+    color: '#F4F7F8',
   },
   content: {
-    fontSize: 12,
-    color: '#888888',
+    flex: 1,
+    padding: 20,
   },
+  
+  postItem: {
+    padding: 15,
+    borderBottomWidth: 1.5,
+    borderColor: '#C5D1D4',
+  },
+  postTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+  
+  postContentPreview: {
+    fontSize: 14,
+    color: '#666',
+    
+  },
+  createButton: {
+    position: 'absolute',
+    bottom: 100,
+    right: 150,
+    backgroundColor: '#F4F7F8',
+    padding: 15,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  createButtonText: {
+    color: '#000',
+    fontSize: 16,
+  },
+
   bottomNavContainer: {
     position: 'absolute',
     bottom: 0,
