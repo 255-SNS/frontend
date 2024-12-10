@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import BottomNav from './components/BottomNav'; // BottomNav import
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,37 +17,39 @@ const BoardListScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* 메뉴 리스트 */}
-      <View style={styles.content}>
-        <Text style={styles.menuTitle}>Menu</Text>
-        {menuItems.map((item) => (
-          <TouchableOpacity 
-            key={item.id} 
-            style={styles.menuItem}
-            onPress={() => {
-              if (item.title === '자유 게시판') {
-                navigation.navigate('FreeBoard');
-              } else if (item.title === '졸업생 게시판') {
-                navigation.navigate('GraduateBoard')
-              } else if (item.title === '취업 게시판') {
-                navigation.navigate('JobBoard')
-              } else if (item.title === 'Taxi Blurr') {
-                navigation.navigate('TaxiBoard')
-              } else if (item.title === '서점') {
-                navigation.navigate('BookstoreBoard')
-              } 
-            }}
-          >
-            <View style={styles.iconContainer}>
-              <Text style={styles.icon}>{item.icon}</Text>
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.menuTitleText}>{item.title}</Text>
-              <Text style={styles.menuDescription}>{item.description}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
+      <ScrollView>
+        {/* 메뉴 리스트 */}
+        <View style={styles.content}>
+          <Text style={styles.menuTitle}>전체 게시판</Text>
+          {menuItems.map((item) => (
+            <TouchableOpacity 
+              key={item.id} 
+              style={styles.menuItem}
+              onPress={() => {
+                if (item.title === '자유 게시판') {
+                  navigation.navigate('FreeBoard');
+                } else if (item.title === '졸업생 게시판') {
+                  navigation.navigate('GraduateBoard')
+                } else if (item.title === '취업 게시판') {
+                  navigation.navigate('JobBoard')
+                } else if (item.title === 'Taxi Blurr') {
+                  navigation.navigate('TaxiBoard')
+                } else if (item.title === '서점') {
+                  navigation.navigate('BookstoreBoard')
+                } 
+              }}
+            >
+              <View style={styles.iconContainer}>
+                <Text style={styles.icon}>{item.icon}</Text>
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.menuTitleText}>{item.title}</Text>
+                <Text style={styles.menuDescription}>{item.description}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+          </View>
+      </ScrollView>
 
       {/* 하단 네비게이션 바 */}
       <BottomNav />
@@ -58,7 +60,7 @@ const BoardListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F6F6F6;',
   },
   content: {
     flex: 1,
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     flexDirection: 'row',
-    backgroundColor: '#F4F7F8',
+    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     padding: 25,
     marginBottom: 15,

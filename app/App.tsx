@@ -15,6 +15,10 @@ import JobScreen from './pages/boardpages/JobScreen';
 import TaxiScreen from './pages/boardpages/TaxiScreen';
 import BookstoreScreen from './pages/boardpages/BookstoreScreen';
 import ProfileScreen from './pages/ProfileScreen';
+import InfoBoardScreen from './pages/components/info_event/InfoBoardScreen';
+import EventCreateScreen from './pages/components/info_event/EventCreateScreen';
+import EventDetailScreen from './pages/components/info_event/EventDetailScreen';
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -33,6 +37,9 @@ const App = () => {
           <Stack.Screen name="JobBoard" component={JobScreen} options={{ title: '취업 게시판' }} />
           <Stack.Screen name="TaxiBoard" component={TaxiScreen} options={{ title: 'Taxi Blurr' }} />
           <Stack.Screen name="BookstoreBoard" component={BookstoreScreen} options={{ title: '서점' }} />
+          <Stack.Screen name="InfoBoard" component={InfoBoardScreen} options={{ title: '정보대 소식 확인하기' }}/>
+          <Stack.Screen name="EventCreate" component={EventCreateScreen} options={{ title: '이벤트 작성' }} />
+          <Stack.Screen name="EventDetail" component={EventDetailScreen} options={{ title: '이벤트' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
