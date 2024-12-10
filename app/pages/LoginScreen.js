@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     
   },
   button: {
-    backgroundColor: '#F4F7F8',
+    backgroundColor: '#000',
     padding: 10,
     borderRadius: 20,
     width: '80%',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     elevation: 5, // Android 그림자 효과
   },
   buttonText: {
-    color: '#000',
+    color: '#FFFFFF',
     fontSize: 16,
   },
 });
