@@ -42,13 +42,13 @@ const MainScreen = () => {
       <View style={styles.bottomContainer}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Text style={styles.servicesTitle}>255 services</Text>
-          <TouchableOpacity style={[styles.button, styles.buttonBlue]} onPress={() => navigation.navigate('BoardList')}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('BoardList')}>
             <Text style={styles.buttonText}>게시판 바로가기</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonGreen]}>
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>게임 출석하기</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonRed]}>
+          <TouchableOpacity onPress={() => navigation.navigate('InfoBoard')} style={styles.button}>
             <Text style={styles.buttonText}>정보대 소식 확인하기</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     width: 300,
     paddingVertical: 15,
     borderRadius: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#000',
     borderColor: '#9D9D9D',
     alignItems: 'center',
     marginBottom: 10,
@@ -137,18 +137,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 }, // 그림자 위치
     elevation: 5, // Android 그림자 효과
   },
-  buttonBlue: {
-    backgroundColor: '#E5E9EF',
-  },
-  buttonGreen: {
-    backgroundColor: '#E1F4E9',
-  },
-  buttonRed: {
-    backgroundColor: '#F6E7E7',
-  },
   buttonText: {
-    fontSize: 16,
-    color: '#000000',
+    fontSize: 18,
+    color: '#FFFFFF',
   },
 });
 
