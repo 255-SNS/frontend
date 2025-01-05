@@ -14,10 +14,13 @@ import GraduateScreen from './pages/boardpages/GraduateScreen';
 import JobScreen from './pages/boardpages/JobScreen';
 import TaxiScreen from './pages/boardpages/TaxiScreen';
 import BookstoreScreen from './pages/boardpages/BookstoreScreen';
-import ProfileScreen from './pages/ProfileScreen';
+import ProfileScreen from './pages/components/profile/ProfileScreen';
 import InfoBoardScreen from './pages/components/info_event/InfoBoardScreen';
 import EventCreateScreen from './pages/components/info_event/EventCreateScreen';
 import EventDetailScreen from './pages/components/info_event/EventDetailScreen';
+import EventCompleteScreen from './pages/components/info_event/EventCompleteScreen';
+import CoffeeDrawScreen from './pages/components/profile/CoffeeDrawScreen';
+import ShopScreen from './pages/components/profile/ShopScreen';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +43,9 @@ const App = () => {
           <Stack.Screen name="InfoBoard" component={InfoBoardScreen} options={{ title: '정보대 소식 확인하기' }}/>
           <Stack.Screen name="EventCreate" component={EventCreateScreen} options={{ title: '이벤트 작성' }} />
           <Stack.Screen name="EventDetail" component={EventDetailScreen} options={{ title: '이벤트' }} />
+          <Stack.Screen name="EventComplete" component={EventCompleteScreen} options={{ title: '이벤트 신청' }}/>
+          <Stack.Screen name="CoffeeDrawScreen" component={CoffeeDrawScreen} options={{ title: '커피 재료 뽑기' }}/>
+          <Stack.Screen name="ShopScreen" component={ShopScreen} options={{ title: 'Shop' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

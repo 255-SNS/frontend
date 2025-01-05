@@ -6,35 +6,20 @@ import { useNavigation } from '@react-navigation/native';
 
 const MainScreen = () => {
   const navigation = useNavigation();
-
-  // 원하는 색상을 여기에 설정
-  const color = 'green'; // 'red', 'green', or 'blue'
-
-  // 선택된 색상에 따라 하트 이미지를 반환
-  const getHeartImage = () => {
-    switch (color) {
-      case 'red':
-        return require('../assets/img/object/red.png');
-      case 'green':
-        return require('../assets/img/object/green.png');
-      case 'blue':
-        return require('../assets/img/object/blue.png');
-      default:
-        return require('../assets/img/object/red.png');
-    }
-  };
+  const userName = '이이오'; // 사용자 이름
+  const userPoint = 225; // 사용자 포인트
 
   return (
     <View style={styles.container}>
       {/* 상단 컨테이너 */}
       <ImageBackground source={require('../assets/img/object/background.png')} style={styles.topContainer}>
-        <View style={styles.overlay}>
-          <Text style={styles.pointText}>point</Text>
-          <TouchableOpacity style={styles.notification}>
-            <Text style={styles.notificationIcon}>🔔</Text>
-          </TouchableOpacity>
+        {/* 포인트 정보 박스 */}
+        <View style={styles.pointBox}>
+          <Text style={styles.pointText}>
+            {userName}님의 point : {userPoint}
+          </Text>
         </View>
-        <Image source={getHeartImage()} style={styles.heartImage} />
+        <Image source={require('../assets/img/object/green.png')} style={styles.heartImage} />
         <Image source={require('../assets/img/zero.png')} style={styles.characterImage} />
       </ImageBackground>
 
@@ -71,30 +56,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
-  overlay: {
+  pointBox: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 50,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)', // 투명한 검정색
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    top: 20, // 높이를 상단에 가깝게 복구
+    alignSelf: 'center', // 박스가 화면 중앙에 위치하도록 설정
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // 반투명 흰색
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 20,
   },
   pointText: {
-    fontSize: 16,
-    color: '#FFFFFF',
+    fontSize: 14,
+    color: '#000',
     fontWeight: 'bold',
-  },
-  notification: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  notificationIcon: {
-    fontSize: 20,
-    color: '#FFFFFF',
   },
   heartImage: {
     width: 100,
