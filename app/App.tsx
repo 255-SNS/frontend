@@ -21,7 +21,7 @@ import EventDetailScreen from './pages/components/info_event/EventDetailScreen';
 import EventCompleteScreen from './pages/components/info_event/EventCompleteScreen';
 import CoffeeDrawScreen from './pages/components/profile/CoffeeDrawScreen';
 import ShopScreen from './pages/components/profile/ShopScreen';
-
+import PostDetail from './pages/components/post/PostDetail';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -36,6 +36,7 @@ const App = () => {
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="BoardList" component={BoardListScreen} />
           <Stack.Screen name="FreeBoard" component={FreeBoardScreen} options={{ title: '자유 게시판' }} />
+          
           <Stack.Screen name="GraduateBoard" component={GraduateScreen} options={{ title: '졸업생 게시판' }} />
           <Stack.Screen name="JobBoard" component={JobScreen} options={{ title: '취업 게시판' }} />
           <Stack.Screen name="TaxiBoard" component={TaxiScreen} options={{ title: 'Taxi Blurr' }} />

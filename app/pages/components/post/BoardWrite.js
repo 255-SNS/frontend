@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   saveButton: {
-    backgroundColor: '#C5D1D4', // 저장 버튼 배경색
+    backgroundColor: '#000', // 저장 버튼 배경색
     borderRadius: 20,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   cancelButton: {
-    backgroundColor: '#F4F7F8', // 취소 버튼 배경색
+    backgroundColor: '#878787', // 취소 버튼 배경색
   },
   buttonText: {
-    color: '#333',
+    color: '#FFF',
     fontSize: 16,
     fontWeight: 'bold',
   },

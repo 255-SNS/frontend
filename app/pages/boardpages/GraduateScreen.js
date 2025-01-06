@@ -6,8 +6,12 @@ import PostDetail from '../components/post/PostDetail';
 
 const FreeBoardScreen = () => {
   const [posts, setPosts] = useState([
-    { id: '1', title: '첫 번째 게시글', writer: '익명1', content: '첫 번째 게시글 내용입니다.' },
-    { id: '2', title: '두 번째 게시글', writer: '익명2', content: '두 번째 게시글 내용입니다.' },
+    { id: '1', title: '정보대 오랜만', writer: '익명', content: '졸업한지 2년지났는데 정보대 앱이 생겼다니 신기하다!' },
+    { id: '2', title: '졸업', writer: '익명', content: '졸업하고 에타도 안들어갔는데 정보대 앱생겼다고 해서 들어옴' },
+    { id: '3', title: '횃불이', writer: '익명', content: '졸업식때 횃불이 인형 받고싶었는데 못받음' },
+    { id: '4', title: '최고당 돈까스', writer: '익명', content: '나 졸업하고 정보대에 돈까스집 생겼다는데 가보고싶다!' },
+    { id: '5', title: '대학원', writer: '익명', content: '졸업하고 타대 석사진행중인데 여러분들은 대학원가지마세요ㅜ' },
+    { id: '6', title: '우와', writer: '익명', content: '다들 졸업하고 뭐하고 사시나요?! 함께 이야기 나누어 보아요~' },
   ]);
   const [isCreating, setIsCreating] = useState(false);
   const [newPost, setNewPost] = useState({ title: '', content: '' });
@@ -60,8 +64,10 @@ const FreeBoardScreen = () => {
                 style={styles.postItem}
                 onPress={() => viewPost(item)}
               >
-                <Text style={styles.postTitle}>{item.title}</Text>
-                {/* <Text style={styles.postWriter}>{item.writer}</Text> */}
+                <View style={styles.titleAndCompanyContainer}>
+                  <Text style={styles.postTitle}>{item.title}</Text>
+                  <Text style={styles.postWriter}>{item.writer}</Text>
+                </View>
                 <Text style={styles.postContentPreview}>
                   {item.content.slice(0, 20)}...
                 </Text>
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
-    backgroundColor: '#F4F7F8',
+    backgroundColor: '#F6F6F6',
     borderRadius: 10,
     paddingHorizontal: 10,
     height: 55,
@@ -137,13 +143,14 @@ const styles = StyleSheet.create({
   postItem: {
     padding: 15,
     borderBottomWidth: 1.5,
-    borderColor: '#C5D1D4',
+    borderColor: '#000',
   },
   postTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 10,
+    flex: 1,
   },
   
   postContentPreview: {
@@ -155,7 +162,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 100,
     right: 150,
-    backgroundColor: '#F4F7F8',
+    backgroundColor: '#000',
     padding: 15,
     borderRadius: 50,
     alignItems: 'center',
@@ -167,10 +174,15 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   createButtonText: {
-    color: '#000',
+    color: '#FFF',
     fontSize: 16,
   },
-
+  titleAndCompanyContainer: {
+    flexDirection: 'row', // 제목과 회사를 같은 줄에 배치
+    justifyContent: 'space-between', // 제목과 회사가 양 끝에 위치
+    alignItems: 'center', // 세로 방향으로 가운데 정렬
+    marginBottom: 5, // 제목/회사와 내용 미리보기 간격
+  },
   bottomNavContainer: {
     position: 'absolute',
     bottom: 0,
@@ -178,6 +190,13 @@ const styles = StyleSheet.create({
     height: 70,
     backgroundColor: '#FFFFFF',
   },
+  postWriter: {
+    fontSize: 16,
+    color: '#666',
+   
+    textAlign: 'right', // 회사명을 오른쪽 정렬
+  }
 });
 
 export default FreeBoardScreen;
+

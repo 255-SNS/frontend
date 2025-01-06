@@ -7,8 +7,12 @@ import JobDetail from '../components/post/JobDetail';
 
 const FreeBoardScreen = () => {
   const [posts, setPosts] = useState([
-    { id: '1', title: '첫 번째 게시글', company: '정보대', writer: '익명1', content: '첫 번째 게시글 내용입니다.' },
-    { id: '2', title: '두 번째 게시글', company: '정보대', writer: '익명2', content: '두 번째 게시글 내용입니다.' },
+    { id: '1', title: '삼성 꿀팁', company: '삼성 전자', writer: '익명1', content: '삼성전자 코딩테스트 대비 꿀팁 전수해드립니다. 연락주세요' },
+    { id: '2', title: 'LG CNS', company: 'LG CNS', writer: '익명2', content: '워라벨 좋습니다' },
+    { id: '1', title: '이직', company: '컴퍼니', writer: '익명1', content: '대기업으로 이직하고싶은데 쉽지 않네요' },
+    { id: '2', title: 'AI', company: 'CJ 올리브영', writer: '익명2', content: '백엔드하다가 AI분야로 넘어가려고 하는데 대학원가야할까요??' },
+    { id: '1', title: '공기업', company: '서울교통공사', writer: '익명1', content: '다 좋은데 공기업은 월급이 너무 적네요..' },
+    { id: '2', title: '취업 꿀팁', company: 'SK hynix', writer: '익명2', content: '취업 잘할려면 성실해야해요.' },
   ]);
   const [isCreating, setIsCreating] = useState(false);
   const [newPost, setNewPost] = useState({ title: '', content: '' });
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
-    backgroundColor: '#F4F7F8',
+    backgroundColor: '#F6F6F6',
     borderRadius: 10,
     paddingHorizontal: 10,
     height: 55,
@@ -150,13 +154,13 @@ const styles = StyleSheet.create({
   postItem: {
     padding: 15,
     borderBottomWidth: 1.5,
-    borderColor: '#C5D1D4',
+    borderColor: '#000',
   },
   postTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 10,
+    marginBottom: 8,
     flex: 1, // 제목이 남는 공간을 차지
   },
   postCompany: {
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 100,
     right: 150,
-    backgroundColor: '#F4F7F8',
+    backgroundColor: '#000',
     padding: 15,
     borderRadius: 50,
     alignItems: 'center',
@@ -187,7 +191,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   createButtonText: {
-    color: '#000',
+    color: '#FFF',
     fontSize: 16,
   },
 
