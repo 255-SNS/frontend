@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // useNavigation 훅 추가
 
 const EventDetailScreen = ({ route }) => {
   const { post } = route.params;
+  const navigation = useNavigation(); // 네비게이션 객체 가져오기
 
   return (
     <ScrollView style={styles.container}>
@@ -40,7 +42,10 @@ const EventDetailScreen = ({ route }) => {
       </View>
 
       {/* 신청 버튼 */}
-      <TouchableOpacity style={styles.applyButton}>
+      <TouchableOpacity
+        style={styles.applyButton}
+        onPress={() => navigation.navigate('EventComplete')} // 'EventCompleteScreen'으로 이동
+      >
         <Text style={styles.applyButtonText}>신청하기</Text>
       </TouchableOpacity>
     </ScrollView>

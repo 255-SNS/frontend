@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-import BottomNav from '../pages/components/BottomNav';
+import BottomNav from '../BottomNav'
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
   const color = 'blue'; // 'red', 'green', 'blue'
-  const department = '임베디드공학과';
+  const department = '정보통신공학과';
+  const navigation = useNavigation();
 
   const getTagStyle = () => {
     switch (color) {
@@ -25,7 +27,7 @@ const ProfileScreen = () => {
         {/* 프로필 정보 */}
         <View style={styles.header}>
           <Image
-            source={require('../assets/img/profile_icon.png')}
+            source={require('./img/profile_icon.png')}
             style={styles.profileImage}
           />
           <View style={styles.profileTextContainer}>
@@ -42,19 +44,25 @@ const ProfileScreen = () => {
         {/* 포인트 정보 */}
         <View style={styles.pointSection}>
           <Text style={styles.pointTitle}>My point</Text>
-          <Text style={styles.pointValue}>0000</Text>
+          <Text style={styles.pointValue}>255</Text>
         </View>
         <View style={styles.actionButtons}>
-          <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => navigation.navigate('CoffeeDrawScreen')} // CoffeeDrawScreen으로 이동
+        >
             <Image
-              source={require('../assets/img/dice_icon.png')}
+              source={require('./img/dice_icon.png')}
               style={styles.diceImage}
             />
             <Text style={styles.actionButtonText}>커피 뽑으러 가기</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
+          <TouchableOpacity
+           style={styles.actionButton}
+           onPress={() => navigation.navigate('ShopScreen')} // ShopScreen으로 이동
+            >
             <Image
-              source={require('../assets/img/shop_icon.png')}
+              source={require('./img/shop_icon.png')}
               style={styles.shopImage}
             />
             <Text style={styles.actionButtonText}>Shop</Text>
