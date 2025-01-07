@@ -21,7 +21,8 @@ import EventDetailScreen from './pages/components/info_event/EventDetailScreen';
 import EventCompleteScreen from './pages/components/info_event/EventCompleteScreen';
 import CoffeeDrawScreen from './pages/components/profile/CoffeeDrawScreen';
 import ShopScreen from './pages/components/profile/ShopScreen';
-import PostDetail from './pages/components/post/PostDetail';
+import TeamSelectionScreen from './pages/TeamSelectionScreen';
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
           <Stack.Screen name="EventComplete" component={EventCompleteScreen} options={{ title: '이벤트 신청' }}/>
           <Stack.Screen name="CoffeeDrawScreen" component={CoffeeDrawScreen} options={{ title: '커피 재료 뽑기' }}/>
           <Stack.Screen name="ShopScreen" component={ShopScreen} options={{ title: 'Shop' }} />
+          <Stack.Screen name="TeamSelection" component={TeamSelectionScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

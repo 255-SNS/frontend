@@ -4,7 +4,7 @@ import BottomNav from '../BottomNav'
 import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
-  const color = 'blue'; // 'red', 'green', 'blue'
+  const color = 'green'; // 'red', 'green', 'blue'
   const department = '정보통신공학과';
   const navigation = useNavigation();
 
@@ -32,7 +32,7 @@ const ProfileScreen = () => {
           />
           <View style={styles.profileTextContainer}>
             <View style={styles.nameRow}>
-              <Text style={styles.profileName}>이오오</Text>
+              <Text style={styles.profileName}>김이오</Text>
               <View style={[styles.colorTag, { borderColor: getTagStyle().borderColor }]}>
                 <Text style={[styles.colorTagText, { color: getTagStyle().color }]}>{color.toUpperCase()}</Text>
               </View>

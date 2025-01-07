@@ -1,8 +1,61 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Animated,
+  Alert,
+} from 'react-native';
 
 const CoffeeDrawScreen = () => {
-  const points = 225;
+  const [points, setPoints] = useState(225);
+  const [shakeAnimation] = useState(new Animated.Value(0));
+
+  const ingredients = ['💧 물', '🌰 원두', '🥛 우유', '🍑 복숭아', '🫙 시럽'];
+
+  const handleGiftBoxClick = () => {
+    if (points < 100) {
+      Alert.alert('포인트 부족', '포인트가 부족합니다.');
+      return;
+    }
+
+    // 선물 상자 흔들림 애니메이션
+    Animated.sequence([
+      Animated.timing(shakeAnimation, {
+        toValue: 10,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(shakeAnimation, {
+        toValue: -10,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(shakeAnimation, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      // 랜덤 재료 뽑기
+      const randomItem =
+        ingredients[Math.floor(Math.random() * ingredients.length)];
+
+      // 포인트 차감 및 팝업 표시
+      setPoints((prevPoints) => prevPoints - 100);
+      Alert.alert('축하합니다!', `${randomItem} 이(가) 뽑혔습니다!`);
+    });
+  };
+
+  const giftBoxStyle = {
+    transform: [
+      {
+        translateX: shakeAnimation,
+      },
+    ],
+  };
 
   return (
     <View style={styles.container}>
@@ -23,10 +76,14 @@ const CoffeeDrawScreen = () => {
       </View>
 
       <View style={styles.giftBoxContainer}>
-        <Image
-          source={require('./img/gift_box.png')}
-          style={styles.giftBoxImage}
-        />
+        <Animated.View style={giftBoxStyle}>
+          <TouchableOpacity onPress={handleGiftBoxClick}>
+            <Image
+              source={require('./img/gift_box.png')}
+              style={styles.giftBoxImage}
+            />
+          </TouchableOpacity>
+        </Animated.View>
       </View>
 
       <View style={styles.buttonContainer}>
@@ -98,14 +155,14 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   giftBoxImage: {
-    width: 180, // 크기 증가
+    width: 180,
     height: 180,
   },
   buttonContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    elevation: 2, // Android 그림자
-    shadowColor: '#000', // iOS 그림자
+    elevation: 2,
+    shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 5,
     shadowOffset: { width: 0, height: 2 },
