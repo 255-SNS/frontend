@@ -1,13 +1,54 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, ImageBackground, ScrollView } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import BottomNav from './components/BottomNav'; // 하단 네비게이션 바 import
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ImageBackground,
+  ScrollView,
+  Animated,
+  TouchableOpacity,
+} from 'react-native';
+import BottomNav from './components/BottomNav';
 import { useNavigation } from '@react-navigation/native';
 
 const MainScreen = () => {
   const navigation = useNavigation();
-  const userName = '이이오'; // 사용자 이름
-  const userPoint = 225; // 사용자 포인트
+  const userName = '김이오';
+  const userPoint = 225;
+
+  const [bounceAnimation] = useState(new Animated.Value(0)); // 애니메이션 값
+
+  useEffect(() => {
+    // 상하 반복 애니메이션 설정
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(bounceAnimation, {
+          toValue: -10, // 위로 이동
+          duration: 2000, // 2초 동안 이동
+          useNativeDriver: true,
+        }),
+        Animated.timing(bounceAnimation, {
+          toValue: 10, // 아래로 이동
+          duration: 2000, // 2초 동안 이동
+          useNativeDriver: true,
+        }),
+        Animated.timing(bounceAnimation, {
+          toValue: -0.5, // 위로 이동
+          duration: 1100, // 2초 동안 이동
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
+  }, []);
+
+  const animatedStyle = {
+    transform: [
+      {
+        translateY: bounceAnimation, // 상하 이동 애니메이션
+      },
+    ],
+  };
 
   return (
     <View style={styles.container}>
@@ -19,8 +60,14 @@ const MainScreen = () => {
             {userName}님의 point : {userPoint}
           </Text>
         </View>
-        <Image source={require('../assets/img/object/green.png')} style={styles.heartImage} />
-        <Image source={require('../assets/img/zero.png')} style={styles.characterImage} />
+        {/* 말풍선 애니메이션 */}
+        <Animated.View style={animatedStyle}>
+          <Image source={require('../assets/img/object/green.png')} style={styles.heartImage} />
+        </Animated.View>
+        {/* 캐릭터 애니메이션 */}
+        <Animated.View style={animatedStyle}>
+          <Image source={require('../assets/img/zero.png')} style={styles.characterImage} />
+        </Animated.View>
       </ImageBackground>
 
       {/* 스크롤 가능한 하단 컨테이너 */}
@@ -58,9 +105,9 @@ const styles = StyleSheet.create({
   },
   pointBox: {
     position: 'absolute',
-    top: 20, // 높이를 상단에 가깝게 복구
-    alignSelf: 'center', // 박스가 화면 중앙에 위치하도록 설정
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // 반투명 흰색
+    top: 20, // 높이를 상단에 가깝게 설정
+    alignSelf: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
     paddingHorizontal: 15,
     paddingVertical: 8,
     borderRadius: 20,
@@ -85,11 +132,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 25,
     padding: 20,
-    marginTop: -30, // 위쪽과 살짝 겹쳐지도록 설정
-    width: '100%', // 화면 전체 너비를 차지하도록 설정
+    marginTop: -30,
+    width: '100%',
   },
   scrollContent: {
-    alignItems: 'center', // 버튼들이 가운데 정렬되도록 설정
+    alignItems: 'center',
   },
   servicesTitle: {
     fontSize: 20,
@@ -105,11 +152,11 @@ const styles = StyleSheet.create({
     borderColor: '#9D9D9D',
     alignItems: 'center',
     marginBottom: 10,
-    shadowColor: '#000', // 그림자 색상
-    shadowOpacity: 0.2, // 그림자 투명도
-    shadowRadius: 8, // 그림자 퍼짐 정도
-    shadowOffset: { width: 0, height: 4 }, // 그림자 위치
-    elevation: 5, // Android 그림자 효과
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 5,
   },
   buttonText: {
     fontSize: 18,

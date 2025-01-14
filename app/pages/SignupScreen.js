@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
+import { useNavigation } from '@react-navigation/native';
 
 const radioButtonsData = [
   { label: '정보통신공학', value: 0 },
@@ -10,6 +11,7 @@ const radioButtonsData = [
 
 const SignupScreen = () => {
   const [selectedDept, setSelectedDept] = useState(0);
+  const navigation = useNavigation();
 
   const handleRadioSelect = (value) => {
     setSelectedDept(value);
@@ -39,7 +41,10 @@ const SignupScreen = () => {
         />
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('TeamSelection')} // TeamSelectionScreen으로 이동
+      >
         <Text style={styles.buttonText}>가입하기</Text>
       </TouchableOpacity>
     </View>
